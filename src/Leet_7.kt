@@ -1,34 +1,39 @@
+import kotlin.math.max
+import kotlin.math.min
+
 class Leet_7 {
 
-    fun rotate(nums: IntArray, k: Int): Unit {
-        val time = k % nums.size
-        val subArray = IntArray(time)
-        var tailIndex = 0
-        nums.forEachIndexed { index, i ->
-            if (index >= nums.size - time) {
-                subArray[tailIndex] = i
-                tailIndex++
+    fun maxProfit(prices: IntArray): Int {
+        var maxProfit = 0
+        prices.forEachIndexed { index, i ->
+            val startIndex = index
+            var endIndex = startIndex + 1
+            while (endIndex < prices.size) {
+                if (prices[endIndex] - prices[startIndex] > maxProfit) {
+                    maxProfit = prices[endIndex] - prices[startIndex]
+                }
+                endIndex++
             }
         }
-        var index = nums.size - 1
-        while (index > time - 1) {
-            nums[index] = nums[index - time]
-            index--
-        }
+        return maxProfit
+    }
 
-        var headIndex = 0
-        while (headIndex < time) {
-            nums[headIndex] = subArray[headIndex]
-            headIndex++
+    fun maxProfit1(prices: IntArray): Int {
+        var maxProfit = 0
+        val dp = IntArray(prices.size)
+        dp[0] = prices[0]
+        prices.forEachIndexed { index, i ->
+            if (index > 0) {
+                dp[index] = min(dp[index - 1], i)
+                maxProfit = max(i - dp[index], maxProfit)
+            }
         }
+        return maxProfit
     }
 }
 
 fun main() {
-    val leet7 = Leet_7()
-    val nums = intArrayOf(-1, -100, 3, 99)
-    leet7.rotate(nums, 2)
-    nums.forEach {
-        print("$it\n")
-    }
+    val leet8 = Leet_7()
+    val prices = intArrayOf(7,1,5,3,6,4)
+    print("${leet8.maxProfit1(prices)}")
 }

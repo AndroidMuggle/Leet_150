@@ -1,2 +1,0 @@
-class Leet_9 {
-}
