@@ -19,7 +19,7 @@ class Leet_53 {
                 }
             }
         }
-        return if (result.isEmpty()) "/" else "/" + result.joinToString("/")
+        return  result.joinToString("/", prefix = "/")
     }
 }
 
