@@ -2,7 +2,7 @@ package `100`
 
 class Leet_73 {
 
-    fun buildTree(inorder: IntArray, postorder: IntArray): TreeNode? {
+    private fun buildTree(inorder: IntArray, postorder: IntArray): TreeNode? {
         if (inorder.isEmpty() || postorder.isEmpty()) {
             return null
         }
